@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawsome Pet Care</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="paw-background"></div>
+    <header>
+        <nav>
+            <a href="#home" class="logo">
+                <i data-lucide="paw-print"></i>
+                Pawsome Pet Care
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
+                <i data-lucide="menu"></i>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="full-screen">
+            <div class="home-container">
+                <div class="pet-picture">
+                    <img src="pets.jpg" alt="Happy pets" class="full-image">
+                </div>
+                <div class="home-content">
+                    <h1>Welcome to Pawsome Pet Care</h1>
+                    <p>We provide top-quality care for your beloved pets.</p>
+                    <a href="#services" class="btn btn-primary">Explore Our Services</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="full-screen">
+            <div class="content">
+                <h2>Our Services</h2>
+                <div class="service-grid">
+                    <div class="service-card" tabindex="0">
+                        <i data-lucide="dog"></i>
+                        <h3>Dog Walking</h3>
+                        <p>Reliable and trustworthy dog walking services.</p>
+                        <div class="service-details">
+                            <p>Experienced dog walkers provide personalized walks tailored to your dog's needs, with flexible scheduling and real-time updates.</p>
+                            <button class="btn btn-secondary">Book Now</button>
+                        </div>
+                    </div>
+                    <div class="service-card" tabindex="0">
+                        <i data-lucide="cat"></i>
+                        <h3>Pet Sitting</h3>
+                        <p>In-home pet sitting services for cats and dogs.</p>
+                        <div class="service-details">
+                            <p>Our pet sitters offer loving care in your home, following your pet's routine with daily updates on their well-being.</p>
+                            <button class="btn btn-secondary">Book Now</button>
+                        </div>
+                    </div>
+                    <div class="service-card" tabindex="0">
+                        <i data-lucide="scissors"></i>
+                        <h3>Grooming</h3>
+                        <p>Professional grooming to keep your pet looking their best.</p>
+                        <div class="service-details">
+                            <p>Skilled groomers offer bathing, haircuts, nail trimming, and more, using pet-friendly products in a stress-free environment.</p>
+                            <button class="btn btn-secondary">Book Now</button>
+                        </div>
+                    </div>
+                    <div class="service-card" tabindex="0">
+                        <i data-lucide="activity"></i>
+                        <h3>Training</h3>
+                        <p>Personalized training sessions for better behavior.</p>
+                        <div class="service-details">
+                            <p>Certified trainers offer one-on-one sessions for specific behavioral issues or general obedience, using positive reinforcement techniques.</p>
+                            <button class="btn btn-secondary">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="full-screen">
+            <div class="content">
+                <h2>About Pawsome Pet Care</h2>
+                <div class="about-grid">
+                    <div class="about-item">
+                        <i data-lucide="heart"></i>
+                        <h3>Our Mission</h3>
+                        <p>Providing exceptional care and love to every pet, creating a stress-free environment where pets thrive and owners have peace of mind.</p>
+                    </div>
+                    <div class="about-item">
+                        <i data-lucide="users"></i>
+                        <h3>Our Team</h3>
+                        <p>Passionate animal lovers with years of experience, from certified trainers to skilled groomers, dedicated to your pet's well-being and happiness.</p>
+                    </div>
+                    <div class="about-item">
+                        <i data-lucide="shield"></i>
+                        <h3>Our Commitment</h3>
+                        <p>Maintaining the highest standards of pet care with tailored services to meet each pet's unique needs, ensuring they receive the best attention and care.</p>
+                    </div>
+                    <div class="about-item">
+                        <i data-lucide="award"></i>
+                        <h3>Why Choose Us</h3>
+                        <p>Choose us for our expertise, reliability, and genuine love for animals. We treat each pet as our own, creating lasting relationships with our clients.</p>
+                    </div>
+                </div>
+                <div class="about-cta">
+                    <h3>Ready to experience the Pawsome difference?</h3>
+                    <a href="#contact" class="btn btn-primary">Contact Us Today</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="full-screen">
+            <div class="content">
+                <h2>Contact Us</h2>
+                <form id="contact-form">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <textarea name="message" placeholder="Your Message" required></textarea>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
