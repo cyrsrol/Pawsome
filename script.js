@@ -29,21 +29,20 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Form submission
-    const form = document.getElementById('contact-form');
-    form.addEventListener('submit', function(e) {
+    const contactForm = document.getElementById('contact-form');
+    contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        const formData = new FormData(form);
+        const formData = new FormData(contactForm);
         const name = formData.get('name');
         const email = formData.get('email');
         const message = formData.get('message');
 
         // Here you would typically send the form data to a server
-        // For this example, we'll just log it to the console
-        console.log('Form submitted:', { name, email, message });
+        console.log('Contact form submitted:', { name, email, message });
 
-        // Show a success message (in a real application, you'd do this after successful server response)
+        // Show a success message
         alert('Thank you for your message! We will get back to you soon.');
-        form.reset();
+        contactForm.reset();
     });
 
     // Service card interaction
@@ -61,34 +60,113 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Book button functionality
-    const bookButtons = document.querySelectorAll('.service-details .btn-secondary');bookButtons.forEach(button => {
+    const bookButtons = document.querySelectorAll('.service-details .btn-secondary');
+    bookButtons.forEach(button => {
         button.addEventListener('click', function(e) {
             e.stopPropagation(); // Prevent triggering the card's click event
             const serviceName = this.closest('.service-card').querySelector('h3').textContent;
-            alert(`Booking for ${serviceName} service. In a real application, this would open a booking form or page.`);
-        });
-    });
-
-    // Highlight active section in navigation
-    const sections = document.querySelectorAll('section');
-    const navItems = document.querySelectorAll('.nav-links a');
-
-    window.addEventListener('scroll', () => {
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (pageYOffset >= sectionTop - 60) {
-                current = section.getAttribute('id');
-            }
-        });
-
-        navItems.forEach(item => {
-            item.classList.remove('active');
-            if (item.getAttribute('href').slice(1) === current) {
-                item.classList.add('active');
+            if (serviceName === 'Dog Walking') {
+                openModal('dogWalkingModal');
+            } else if (serviceName === 'Pet Sitting') {
+                openModal('petSittingModal');
+            } else if (serviceName === 'Grooming') {
+                openModal('groomingModal');
+            } else if (serviceName === 'Training') {
+                openModal('trainingModal');
             }
         });
     });
+
+    // Modal functionality
+    function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        modal.style.display = "block";
+    }
+
+    function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        modal.style.display = "none";
+    }
+
+    // Close button functionality
+    const closeButtons = document.getElementsByClassName("close");
+    for (let i = 0; i < closeButtons.length; i++) {
+        closeButtons[i].onclick = function() {
+            closeModal(this.closest('.modal').id);
+        }
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+        if (event.target.classList.contains('modal')) {
+            closeModal(event.target.id);
+        }
+    }
+
+    // Handle form submissions
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => {
+        form.addEventListener("submit", function(e) {
+            e.preventDefault();
+            handleFormSubmission(this, this.closest('.modal').id);
+        });
+    });
+
+    function handleFormSubmission(form, modalId) {
+        console.log(`${modalId} form submitted!`);
+        const formData = new FormData(form);
+        for (let [key, value] of formData.entries()) {
+            console.log(key + ': ' + value);
+        }
+        closeModal(modalId);
+        form.reset();
+
+        // Show a success message
+        alert('Thank you for your booking! We will confirm your appointment shortly.');
+    }
+
+    // Function to handle custom option selection
+    function handleCustomOption(selectId, customInputId) {
+        const select = document.getElementById(selectId);
+        const customInput = document.getElementById(customInputId);
+
+        if (select && customInput) {
+            select.addEventListener('change', function() {
+                if (this.value === 'depends') {
+                    customInput.style.display = 'block';
+                    customInput.required = true;
+                } else {
+                    customInput.style.display = 'none';
+                    customInput.required = false;
+                    customInput.value = ''; // Clear the input when hidden
+                }
+            });
+        }
+    }
+
+    // Apply custom option handling to specific dropdowns
+    handleCustomOption('dw-dogInteraction', 'dw-customDogInteraction');
+    handleCustomOption('ps-interactionWithOtherPets', 'ps-customInteractionWithOtherPets');
+
+    // Footer visibility control
+    const footer = document.getElementById('main-footer');
+    const contactSection = document.getElementById('contact');
+
+    function checkFooterVisibility() {
+        const contactRect = contactSection.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+
+        if (contactRect.bottom <= windowHeight) {
+            footer.classList.add('visible');
+        } else {
+            footer.classList.remove('visible');
+        }
+    }
+
+    window.addEventListener('scroll', checkFooterVisibility);
+    window.addEventListener('resize', checkFooterVisibility);
+
+    // Initial check
+    checkFooterVisibility();
 });
 
