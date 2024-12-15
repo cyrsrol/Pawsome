@@ -8,26 +8,27 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-    <div class="paw-background"></div>
-    <header>
-        <nav>
+    <header class="main-header">
+        <div class="header-content">
             <a href="#home" class="logo">
                 <i data-lucide="paw-print"></i>
                 Pawsome Pet Care
             </a>
+            <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+        <nav>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
-                <i data-lucide="menu"></i>
-            </button>
         </nav>
     </header>
-
-    <main>
+    <div class="paw-background"></div>
+    <main class="main-content">
         <section id="home" class="full-screen">
             <div class="home-container">
                 <div class="pet-picture">
@@ -51,7 +52,7 @@
                         <p>Reliable and trustworthy dog walking services.</p>
                         <div class="service-details">
                             <p>Experienced dog walkers provide personalized walks tailored to your dog's needs, with flexible scheduling and real-time updates.</p>
-                            <button class="btn btn-secondary">Book Now</button>
+                            <button class="btn btn-secondary" id="bookDogWalking">Book Now</button>
                         </div>
                     </div>
                     <div class="service-card" tabindex="0">
@@ -60,7 +61,7 @@
                         <p>In-home pet sitting services for cats and dogs.</p>
                         <div class="service-details">
                             <p>Our pet sitters offer loving care in your home, following your pet's routine with daily updates on their well-being.</p>
-                            <button class="btn btn-secondary">Book Now</button>
+                            <button class="btn btn-secondary" id="bookPetSitting">Book Now</button>
                         </div>
                     </div>
                     <div class="service-card" tabindex="0">
@@ -69,7 +70,7 @@
                         <p>Professional grooming to keep your pet looking their best.</p>
                         <div class="service-details">
                             <p>Skilled groomers offer bathing, haircuts, nail trimming, and more, using pet-friendly products in a stress-free environment.</p>
-                            <button class="btn btn-secondary">Book Now</button>
+                            <button class="btn btn-secondary" id="bookGrooming">Book Now</button>
                         </div>
                     </div>
                     <div class="service-card" tabindex="0">
@@ -78,7 +79,7 @@
                         <p>Personalized training sessions for better behavior.</p>
                         <div class="service-details">
                             <p>Certified trainers offer one-on-one sessions for specific behavioral issues or general obedience, using positive reinforcement techniques.</p>
-                            <button class="btn btn-secondary">Book Now</button>
+                            <button class="btn btn-secondary" id="bookTraining">Book Now</button>
                         </div>
                     </div>
                 </div>
@@ -110,10 +111,6 @@
                         <p>Choose us for our expertise, reliability, and genuine love for animals. We treat each pet as our own, creating lasting relationships with our clients.</p>
                     </div>
                 </div>
-                <div class="about-cta">
-                    <h3>Ready to experience the Pawsome difference?</h3>
-                    <a href="#contact" class="btn btn-primary">Contact Us Today</a>
-                </div>
             </div>
         </section>
 
@@ -130,7 +127,754 @@
         </section>
     </main>
 
-    <script src="script.js"></script>
+    <div id="dogWalkingModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Book Dog Walking Service</h2>
+                <p>Please fill out the form below to book a dog walking service.</p>
+                <span class="close">&times;</span>
+            </div>
+            <form id="dogWalkingForm">
+                <!-- Other form fields... --><h3>Owner's Information</h3>
+                <div class="form-group">
+                    <label for="dw-ownerName">Full Name</label>
+                    <input type="text" id="dw-ownerName" name="ownerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="dw-phoneNumber">Phone Number</label>
+                    <input type="tel" id="dw-phoneNumber" name="phoneNumber" required>
+                </div>
+                <div class="form-group">
+                    <label for="dw-email">Email Address</label>
+                    <input type="email" id="dw-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="dw-address">Address</label>
+                    <input type="text" id="dw-address" name="address" required>
+                </div>
+
+                <h3>Dog's Information</h3>
+                <div class="form-group">
+                    <label for="dw-dogName">Dog's Name</label>
+                    <input type="text" id="dw-dogName" name="dogName" required>
+                </div>
+                <div class="form-group">
+                    <label for="dw-breed">Breed</label>
+                    <input type="text" id="dw-breed" name="breed" required>
+                </div>
+                <div class="form-group">
+                    <label for="dw-age">Age</label>
+                    <select id="dw-age" name="age" required>
+                        <option value="" disabled selected>Select Age</option>
+                        <option value="puppy">Puppy (under 1 year)</option>
+                        <option value="young">Young (1-3 years)</option>
+                        <option value="adult">Adult (4-7 years)</option>
+                        <option value="senior">Senior (8+ years)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="dw-gender">Gender</label>
+                    <select id="dw-gender" name="gender" required>
+                        <option value="" disabled selected>Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="neutered">Neutered/Spayed</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="dw-weight">Weight</label>
+                    <select id="dw-weight" name="weight" required>
+                        <option value="" disabled selected>Select Weight</option>
+                        <option value="small">Small (<10kg)</option>
+                        <option value="medium">Medium (10-25kg)</option>
+                        <option value="large">Large (25-40kg)</option>
+                        <option value="xlarge">Extra Large (>40kg)</option>
+                    </select>
+                </div>
+
+                <h4>Temperament/Behavior</h4>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="temperament" value="friendly_dogs"> Friendly with other dogs</label>
+                    <label><input type="checkbox" name="temperament" value="friendly_people"> Friendly with people</label>
+                    <label><input type="checkbox" name="temperament" value="shy"> Shy or anxious</label>
+                    <label><input type="checkbox" name="temperament" value="aggressive"> Aggressive tendencies</label>
+                    <label><input type="checkbox" name="temperament" value="hyperactive"> Hyperactive/energetic</label>
+                    <label><input type="checkbox" name="temperament" value="calm"> Calm and relaxed</label>
+                </div>
+
+                <h3>Health Information</h3>
+                <div class="form-group">
+                    <label for="dw-medicalConditions">Medical Conditions</label>
+                    <textarea id="dw-medicalConditions" name="medicalConditions" placeholder="e.g., allergies, joint issues, breathing problems"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="dw-vaccinationStatus">Vaccination Status</label>
+                    <select id="dw-vaccinationStatus" name="vaccinationStatus" required>
+                        <option value="" disabled selected>Select Status</option>
+                        <option value="upToDate">Up-to-date</option>
+                        <option value="partial">Partial</option>
+                        <option value="notVaccinated">Not Vaccinated</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="dw-medications">Medications or Special Needs</label>
+                    <textarea id="dw-medications" name="medications"></textarea>
+                </div>
+
+                <h3>Walking Preferences</h3>
+                <div class="form-group">
+                    <label for="dw-walkDuration">Preferred Walk Duration</label>
+                    <select id="dw-walkDuration" name="walkDuration" required>
+                        <option value="" disabled selected>Select Duration</option>
+                        <option value="15">15 minutes</option>
+                        <option value="30">30 minutes</option>
+                        <option value="45">45 minutes</option>
+                        <option value="60">1 hour</option>
+                        <option value="custom">Custom</option>
+                    </select>
+                    <input type="text" id="dw-customWalkDuration" name="customWalkDuration" placeholder="Enter custom duration" style="display: none;">
+                </div>
+                <div class="form-group">
+                    <label for="dw-walkTime">Preferred Walk Time</label>
+                    <select id="dw-walkTime" name="walkTime" required>
+                        <option value="" disabled selected>Select Time</option>
+                        <option value="morning">Morning</option>
+                        <option value="afternoon">Afternoon</option>
+                        <option value="evening">Evening</option>
+                        <option value="night">Night</option>
+                    </select>
+                </div>
+                <h4>Walking Pace</h4>
+                <div class="radio-group">
+                    <label><input type="radio" name="walkingPace" value="slow" required> Slow stroll</label>
+                    <label><input type="radio" name="walkingPace" value="moderate" required> Moderate pace</label>
+                    <label><input type="radio" name="walkingPace" value="high" required> High energy</label>
+                </div>
+                <div class="form-group">
+                    <label for="dw-leashPreference">On-Leash or Off-Leash?</label>
+                    <select id="dw-leashPreference" name="leashPreference" required>
+                        <option value="" disabled selected>Select Preference</option>
+                        <option value="always">Always on-leash</option>
+                        <option value="off">Off-leash if safe</option>
+                        <option value="flexible">Flexible</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="dw-dogInteraction">Interaction with Other Dogs?</label>
+                    <select id="dw-dogInteraction" name="dogInteraction" required>
+                        <option value="" disabled selected>Select Preference</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                        <option value="depends">Depends (please specify)</option>
+                    </select>
+                    <input type="text" id="dw-customDogInteraction" name="customDogInteraction" class="custom-input" placeholder="Please specify" style="display: none;">
+                </div>
+                <div class="form-group">
+                    <label for="dw-additionalInfo">Additional Information or Special Requests</label>
+                    <textarea id="dw-additionalInfo" name="additionalInfo"></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Submit Booking</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="petSittingModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Book Pet Sitting Service</h2>
+                <p>Please fill out the form below to book a pet sitting service.</p>
+                <span class="close">&times;</span>
+            </div>
+            <form id="petSittingForm">
+                <h3>Owner's Information</h3>
+                <div class="form-group">
+                    <label for="ps-ownerName">Full Name</label>
+                    <input type="text" id="ps-ownerName" name="ownerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="ps-phoneNumber">Phone Number</label>
+                    <input type="tel" id="ps-phoneNumber" name="phoneNumber" required>
+                </div>
+                <div class="form-group">
+                    <label for="ps-email">Email Address</label>
+                    <input type="email" id="ps-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="ps-address">Address</label>
+                    <input type="text" id="ps-address" name="address" required>
+                </div>
+                <div class="form-group">
+                    <label for="ps-emergencyContact">Emergency Contact Name and Number</label>
+                    <input type="text" id="ps-emergencyContact" name="emergencyContact" required>
+                </div>
+
+                <h3>Pet Information</h3>
+                <div class="form-group">
+                    <label for="ps-petName">Pet Name</label>
+                    <input type="text" id="ps-petName" name="petName" required>
+                </div>
+                <div class="form-group">
+                    <label for="ps-petType">Pet Type</label>
+                    <select id="ps-petType" name="petType" required>
+                        <option value="">Select Pet Type</option>
+                        <option value="dog">Dog</option>
+                        <option value="cat">Cat</option>
+                        <option value="bird">Bird</option>
+                        <option value="rabbit">Rabbit</option>
+                        <option value="other">Other (please specify)</option>
+                    </select>
+                    <input type="text" id="ps-customPetType" name="customPetType" placeholder="Enter pet type" style="display: none;">
+                </div>
+                <div class="form-group">
+                    <label for="ps-breed">Breed/Species</label>
+                    <input type="text" id="ps-breed" name="breed" required>
+                </div>
+                <div class="form-group">
+                    <label for="ps-age">Age</label>
+                    <select id="ps-age" name="age" required>
+                        <option value="" disabled selected>Select Age</option>
+                        <option value="puppy">Puppy (under 1 year)</option>
+                        <option value="young">Young (1-3 years)</option>
+                        <option value="adult">Adult (4-7 years)</option>
+                        <option value="senior">Senior (8+ years)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="ps-gender">Gender</label>
+                    <select id="ps-gender" name="gender" required>
+                        <option value="" disabled selected>Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="neutered">Neutered/Spayed</option>
+                    </select>
+                </div>
+
+                <h4>Health Information</h4>
+                <div class="form-group">
+                    <label for="ps-vaccinationStatus">Vaccination Status</label>
+                    <select id="ps-vaccinationStatus" name="vaccinationStatus" required>
+                        <option value="" disabled selected>Select Status</option>
+                        <option value="upToDate">Up-to-date</option>
+                        <option value="partial">Partial</option>
+                        <option value="notVaccinated">Not Vaccinated</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="ps-medicalConditions">Medical Conditions</label>
+                    <textarea id="ps-medicalConditions" name="medicalConditions" placeholder="allergies, chronic illnesses, dietary restrictions"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="ps-medications">Medications</label>
+                    <textarea id="ps-medications" name="medications" placeholder="name, dosage, and administration instructions"></textarea>
+                </div>
+
+                <h4>Behavior and Personality</h4>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="temperament" value="friendly"> Friendly with strangers</label>
+                    <label><input type="checkbox" name="temperament" value="aggressive"> Aggressive</label>
+                    <label><input type="checkbox" name="temperament" value="shy"> Shy/anxious</label>
+                    <label><input type="checkbox" name="temperament" value="playful"> Playful/energetic</label>
+                    <label><input type="checkbox" name="temperament" value="calm"> Calm and relaxed</label>
+                </div>
+                <div class="form-group">
+                    <label for="ps-interactionWithOtherPets">Interaction with Other Pets</label>
+                    <select id="ps-interactionWithOtherPets" name="interactionWithOtherPets" required>
+                        <option value="" disabled selected>Select Preference</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                        <option value="depends">Depends (please specify)</option>
+                    </select>
+                    <input type="text" id="ps-customInteractionWithOtherPets" name="customInteractionWithOtherPets" class="custom-input" placeholder="Please specify" style="display: none;">
+                </div>
+                <div class="form-group">
+                    <label for="ps-specialHabits">Special Habits or Quirks</label>
+                    <textarea id="ps-specialHabits" name="specialHabits"></textarea>
+                </div>
+
+                <h3>Care Instructions</h3>
+                <div class="form-group">
+                    <label for="ps-feedingSchedule">Feeding Schedule</label>
+                    <textarea id="ps-feedingSchedule" name="feedingSchedule"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="ps-foodTypeQuantity">Type of Food and Quantity</label>
+                    <textarea id="ps-foodTypeQuantity" name="foodTypeQuantity"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="ps-treatsAllowed">Treats Allowed?</label>
+                    <select id="ps-treatsAllowed" name="treatsAllowed">
+                        <option value="" disabled selected>Select Option</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="ps-exerciseRequirements">Daily Exercise Requirements</label>
+                    <textarea id="ps-exerciseRequirements" name="exerciseRequirements"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="ps-preferredActivities">Preferred Activities</label>
+                    <textarea id="ps-preferredActivities" name="preferredActivities" placeholder="e.g., walking, playing fetch, cuddle time"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="ps-cleanupInstructions">Litterbox/Cage Cleaning Instructions</label>
+                    <textarea id="ps-cleanupInstructions" name="cleanupInstructions"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="ps-cleanupFrequency">Frequency of Cleanup</label>
+                    <input type="text" id="ps-cleanupFrequency" name="cleanupFrequency">
+                </div>
+                <div class="form-group">
+                    <label for="ps-sleepingArrangements">Where Does Your Pet Sleep?</label>
+                    <textarea id="ps-sleepingArrangements" name="sleepingArrangements"></textarea>
+                </div>
+
+                <h3>Sitting Preferences</h3>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="sittingType" value="homeVisit"> Home Visit</label>
+                    <label><input type="checkbox" name="sittingType" value="overnightStay"> Overnight Stay</label>
+                    <label><input type="checkbox" name="sittingType" value="boarding"> Boarding (at sitter's home)</label>
+                </div>
+                <div class="form-group">
+                    <label for="ps-sittingStartDate">Start Date and Time</label>
+                    <input type="datetime-local" id="ps-sittingStartDate" name="sittingStartDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="ps-sittingEndDate">End Date and Time</label>
+                    <input type="datetime-local" id="ps-sittingEndDate" name="sittingEndDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="ps-preferredSitters">Preferred Sitters (if any)</label>
+                    <textarea id="ps-preferredSitters" name="preferredSitters"></textarea>
+                </div>
+
+                <h3>Additional Information</h3>
+                <div class="form-group">
+                    <label for="ps-favoriteToys">Favorite Toys or Games</label>
+                    <textarea id="ps-favoriteToys" name="favoriteToys"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="ps-fearsOrTriggers">Does Your Pet Have Any Fears or Triggers?</label>
+                    <textarea id="ps-fearsOrTriggers" name="fearsOrTriggers" placeholder="e.g., thunderstorms, loud noises, strangers"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="ps-specialInstructions">Special Instructions</label>
+                    <textarea id="ps-specialInstructions" name="specialInstructions" placeholder="anything not covered in the previous sections"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Booking</button>
+            </form>
+        </div>
+    </div>
+
+<div id="groomingModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Book Pet Grooming Service</h2>
+            <p>Please fill out the form below to book a pet grooming service.</p>
+            <span class="close">&times;</span>
+        </div>
+        <form id="groomingForm">
+            <h3>Owner's Information</h3>
+            <div class="form-group">
+                <label for="gr-ownerName">Full Name</label>
+                <input type="text" id="gr-ownerName" name="ownerName" required>
+            </div>
+            <div class="form-group">
+                <label for="gr-phoneNumber">Phone Number</label>
+                <input type="tel" id="gr-phoneNumber" name="phoneNumber" required>
+            </div>
+            <div class="form-group">
+                <label for="gr-email">Email Address</label>
+                <input type="email" id="gr-email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="gr-address">Address</label>
+                <input type="text" id="gr-address" name="address">
+            </div>
+
+            <h3>Pet Information</h3>
+            <h4>Basic Details</h4>
+            <div class="form-group">
+                <label for="gr-petName">Pet's Name</label>
+                <input type="text" id="gr-petName" name="petName" required>
+            </div>
+            <div class="form-group">
+                <label for="gr-petType">Type of Pet</label>
+                <select id="gr-petType" name="petType" required>
+                    <option value="">Select Pet Type</option>
+                    <option value="dog">Dog</option>
+                    <option value="cat">Cat</option>
+                    <option value="bird">Bird</option>
+                    <option value="rabbit">Rabbit</option>
+                    <option value="other">Other (please specify)</option>
+                </select>
+                <input type="text" id="gr-customPetType" name="customPetType" placeholder="Enter pet type" style="display: none;">
+            </div>
+            <div class="form-group">
+                <label for="gr-breed">Breed</label>
+                <input type="text" id="gr-breed" name="breed" required>
+            </div>
+            <div class="form-group">
+                <label for="gr-age">Age</label>
+                <select id="gr-age" name="age" required>
+                    <option value="" disabled selected>Select Age</option>
+                    <option value="puppy">Puppy (under 1 year)</option>
+                    <option value="young">Young (1-3 years)</option>
+                    <option value="adult">Adult (4-7 years)</option>
+                    <option value="senior">Senior (8+ years)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="gr-gender">Gender</label>
+                <select id="gr-gender" name="gender" required>
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="neutered">Neutered/Spayed</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="gr-weight">Weight</label>
+                <select id="gr-weight" name="weight" required>
+                    <option value="">Select Weight</option>
+                    <option value="small">Small (&lt;10kg)</option>
+                    <option value="medium">Medium (10-25kg)</option>
+                    <option value="large">Large (25-40kg)</option>
+                    <option value="xlarge">Extra Large (&gt;40kg)</option>
+                </select>
+            </div>
+
+            <h4>Health Information</h4>
+            <div class="form-group">
+                <label for="gr-medicalConditions">Medical Conditions</label>
+                <textarea id="gr-medicalConditions" name="medicalConditions" placeholder="E.g., skin issues, allergies, or other health concerns."></textarea>
+            </div>
+            <div class="form-group">
+                <label for="gr-vaccinationStatus">Vaccination Status</label>
+                <select id="gr-vaccinationStatus" name="vaccinationStatus" required>
+                    <option value="">Select Status</option>
+                    <option value="upToDate">Up-to-date</option>
+                    <option value="partial">Partial</option>
+                    <option value="notVaccinated">Not Vaccinated</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="gr-medications">Medications</label>
+                <textarea id="gr-medications" name="medications" placeholder="Include name, dosage, and instructions if relevant."></textarea>
+            </div>
+            <div class="form-group">
+                <label for="gr-injuries">Does Your Pet Have Any Injuries?</label>
+                <textarea id="gr-injuries" name="injuries"></textarea>
+            </div>
+
+            <h4>Behavior</h4>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="temperament" value="friendly"> Friendly with people</label>
+                <label><input type="checkbox" name="temperament" value="anxious"> Anxious or nervous</label>
+                <label><input type="checkbox" name="temperament" value="aggressive"> Aggressive tendencies</label>
+                <label><input type="checkbox" name="temperament" value="calm"> Calm and relaxed</label>
+            </div>
+            <div class="form-group">
+                <label for="gr-handlingConcerns">Handling Concerns</label>
+                <textarea id="gr-handlingConcerns" name="handlingConcerns" placeholder="E.g., fear of clippers, dislikes being touched in specific areas, etc."></textarea>
+            </div>
+
+            <h3>Grooming Preferences</h3>
+            <h4>Services Required</h4>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="groomingServices" value="bath"> Bath only</label>
+                <label><input type="checkbox" name="groomingServices" value="fullGrooming"> Full grooming (bath, haircut, nail trimming)</label>
+                <label><input type="checkbox" name="groomingServices" value="haircut"> Haircut/style only</label>
+                <label><input type="checkbox" name="groomingServices" value="nailTrimming"> Nail trimming/grinding</label>
+                <label><input type="checkbox" name="groomingServices" value="earCleaning"> Ear cleaning</label>
+                <label><input type="checkbox" name="groomingServices" value="teethCleaning"> Teeth cleaning</label>
+                <label><input type="checkbox" name="groomingServices" value="deShedding"> De-shedding treatment</label>
+                <label><input type="checkbox" name="groomingServices" value="fleaTreatment"> Flea/tick treatment</label>
+                <label><input type="checkbox" name="groomingServices" value="analGlands"> Anal gland expression</label>
+                <label><input type="checkbox" name="groomingServices" value="other"> Other (please specify)</label>
+            </div>
+            <div class="form-group">
+                <label for="gr-otherServices">Other Services</label>
+                <input type="text" id="gr-otherServices" name="otherServices">
+            </div>
+
+            <h4>Style Preferences</h4>
+            <div class="form-group">
+                <label for="gr-haircutStyle">Haircut Style</label>
+                <textarea id="gr-haircutStyle" name="haircutStyle" placeholder="E.g., breed-specific cut, summer shave, custom style (describe)."></textarea>
+            </div>
+            <div class="form-group">
+                <label for="gr-hairLength">Length of Hair to Leave</label>
+                <select id="gr-hairLength" name="hairLength">
+                    <option value="">Select Length</option>
+                    <option value="short">Short</option>
+                    <option value="medium">Medium</option>
+                    <option value="long">Long</option>
+                </select>
+            </div>
+
+            <h4>Additional Services</h4>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="addons" value="specialShampoo"> Special shampoo (e.g., hypoallergenic, medicated, flea/tick)</label>
+                <label><input type="checkbox" name="addons" value="pawPadTreatment"> Paw pad treatment</label>
+                <label><input type="checkbox" name="addons" value="perfume"> Scented spray/perfume</label>
+                <label><input type="checkbox" name="addons" value="bandana"> Bandana/bow</label>
+            </div>
+
+            <h3>Appointment Details</h3>
+            <div class="form-group">
+                <label for="gr-appointmentDate">Preferred Date and Time</label>
+                <input type="datetime-local" id="gr-appointmentDate" name="appointmentDate" required>
+            </div>
+            <div class="form-group">
+                <label for="gr-dropOffArrangements">Drop-off and Pick-up Arrangements</label>
+                <select id="gr-dropOffArrangements" name="dropOffArrangements" required>
+                    <option value="">Select Arrangement</option>
+                    <option value="dropOff">I will drop off and pick up</option>
+                    <option value="mobile">Mobile grooming at my home</option>
+                    <option value="other">Other (specify)</option>
+                </select>
+                <input type="text" id="gr-customDropOffArrangements" name="customDropOffArrangements" placeholder="Specify arrangements" style="display: none;">
+            </div>
+            <div class="form-group">
+                <label for="gr-otherArrangements">Other Arrangements</label>
+                <input type="text" id="gr-otherArrangements" name="otherArrangements">
+            </div>
+
+            <h3>Special Instructions</h3>
+            <div class="form-group">
+                <label for="gr-<continuation_point>
+areasToAvoid">Are There Specific Areas to Avoid?</label>
+                <textarea id="gr-areasToAvoid" name="areasToAvoid" placeholder="E.g., due to injuries, sensitive spots."></textarea>
+            </div>
+            <div class="form-group">
+                <label for="gr-additionalNotes">Additional Notes</label>
+                <textarea id="gr-additionalNotes" name="additionalNotes"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit Booking</button>
+        </form>
+    </div>
+</div>
+
+<div id="trainingModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Book Pet Training Service</h2>
+            <p>Please fill out the form below to book a pet training service.</p>
+            <span class="close">&times;</span>
+        </div>
+        <form id="trainingForm">
+            <h3>Owner's Information</h3>
+            <div class="form-group">
+                <label for="tr-ownerName">Full Name</label>
+                <input type="text" id="tr-ownerName" name="ownerName" required>
+            </div>
+            <div class="form-group">
+                <label for="tr-phoneNumber">Phone Number</label>
+                <input type="tel" id="tr-phoneNumber" name="phoneNumber" required>
+            </div>
+            <div class="form-group">
+                <label for="tr-email">Email Address</label>
+                <input type="email" id="tr-email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="tr-address">Address</label>
+                <input type="text" id="tr-address" name="address">
+            </div>
+
+            <h3>Pet Information</h3>
+            <h4>Basic Details</h4>
+            <div class="form-group">
+                <label for="tr-petName">Pet's Name</label>
+                <input type="text" id="tr-petName" name="petName" required>
+            </div>
+            <div class="form-group">
+                <label for="tr-petType">Type of Pet</label>
+                <select id="tr-petType" name="petType" required>
+                    <option value="">Select Pet Type</option>
+                    <option value="dog">Dog</option>
+                    <option value="cat">Cat</option>
+                    <option value="bird">Bird</option>
+                    <option value="rabbit">Rabbit</option>
+                    <option value="other">Other (please specify)</option>
+                </select>
+                <input type="text" id="tr-customPetType" name="customPetType" placeholder="Please specify" style="display: none;">
+            </div>
+            <div class="form-group">
+                <label for="tr-breed">Breed</label>
+                <input type="text" id="tr-breed" name="breed" required>
+            </div>
+            <div class="form-group">
+                <label for="tr-age">Age</label>
+                <select id="tr-age" name="age" required>
+                    <option value="" disabled selected>Select Age</option>
+                    <option value="puppy">Puppy (under 1 year)</option>
+                    <option value="adult">Adult (1-7 years)</option>
+                    <option value="senior">Senior (8+ years)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="tr-gender">Gender</label>
+                <select id="tr-gender" name="gender" required>
+                    <option value="" disabled selected>Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="neutered">Neutered/Spayed</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="tr-weight">Weight</label>
+                <select id="tr-weight" name="weight" required>
+                    <option value="" disabled selected>Select Weight</option>
+                    <option value="small">Small (<10kg)</option>
+                    <option value="medium">Medium (10-25kg)</option>
+                    <option value="large">Large (25-40kg)</option>
+                    <option value="xlarge">Extra Large (>40kg)</option>
+                </select>
+            </div>
+
+            <h4>Health Information</h4>
+            <div class="form-group">
+                <label for="tr-medicalConditions">Medical Conditions</label>
+                <textarea id="tr-medicalConditions" name="medicalConditions" placeholder="E.g., joint issues, allergies, or other health concerns."></textarea>
+            </div>
+            <div class="form-group">
+                <label for="tr-vaccinationStatus">Vaccination Status</label>
+                <select id="tr-vaccinationStatus" name="vaccinationStatus" required>
+                    <option value="" disabled selected>Select Status</option>
+                    <option value="upToDate">Up-to-date</option>
+                    <option value="partial">Partial</option>
+                    <option value="notVaccinated">Not Vaccinated</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="tr-medications">Medications</label>
+                <textarea id="tr-medications" name="medications" placeholder="Include name, dosage, and administration instructions."></textarea>
+            </div>
+
+            <h4>Behavioral Information</h4>
+            <div class="checkbox-group">
+                <label>Temperament (select all that apply)</label>
+                <label><input type="checkbox" name="temperament" value="friendly"> Friendly with people</label>
+                <label><input type="checkbox" name="temperament" value="aggressive"> Aggressive</label>
+                <label><input type="checkbox" name="temperament" value="anxious"> Anxious or fearful</label>
+                <label><input type="checkbox" name="temperament" value="calm"> Calm and relaxed</label>
+                <label><input type="checkbox" name="temperament" value="hyperactive"> Hyperactive/energetic</label>
+            </div>
+            <div class="form-group">
+                <label for="tr-previousTraining">Previous Training History</label>
+                <select id="tr-previousTraining" name="previousTraining" required>
+                    <option value="" disabled selected>Select Training History</option>
+                    <option value="none">None</option>
+                    <option value="basic">Basic Commands</option>
+                    <option value="advanced">Advanced Training</option>
+                    <option value="other">Other (please specify)</option>
+                </select>
+                <input type="text" id="tr-customPreviousTraining" name="customPreviousTraining" placeholder="Please specify" style="display: none;">
+            </div>
+            <div class="form-group">
+                <label for="tr-behavioralIssues">Behavioral Issues</label>
+                <textarea id="tr-behavioralIssues" name="behavioralIssues" placeholder="E.g., excessive barking, biting, leash pulling, destructive behavior."></textarea>
+            </div>
+
+            <h3>Training Goals</h3>
+            <h4>Primary Objectives</h4>
+            <div class="checkbox-group">
+                <label>What Are Your Training Goals? (select all that apply)</label>
+                <label><input type="checkbox" name="trainingGoals" value="basicObedience"> Basic obedience (sit, stay, come)</label>
+                <label><input type="checkbox" name="trainingGoals" value="pottyTraining"> Potty training</label>
+                <label><input type="checkbox" name="trainingGoals" value="leashManners"> Leash manners</label>
+                <label><input type="checkbox" name="trainingGoals" value="socialization"> Socialization with other pets or people</label>
+                <label><input type="checkbox" name="trainingGoals" value="tricks"> Specific tricks or skills</label>
+                <label><input type="checkbox" name="trainingGoals" value="behaviorCorrection"> Behavior correction</label>
+            </div>
+            <div class="form-group">
+                <label for="tr-additionalGoals">Additional Goals or Specific Commands</label>
+                <textarea id="tr-additionalGoals" name="additionalGoals" placeholder="E.g., 'heel,' 'leave it,' 'fetch.'"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="tr-preferredMethods">Preferred Training Methods</label>
+                <select id="tr-preferredMethods" name="preferredMethods" required>
+                    <option value="" disabled selected>Select Preferred Method</option>
+                    <option value="positiveReinforcement">Positive reinforcement (e.g., treats and rewards)</option>
+                    <option value="clicker">Clicker training</option>
+                    <option value="balanced">Balanced training</option>
+                    <option value="other">Other (please specify)</option>
+                </select>
+                <input type="text" id="tr-customPreferredMethods" name="customPreferredMethods" placeholder="Please specify" style="display: none;">
+            </div>
+
+            <h3>Training Session Preferences</h3>
+            <div class="checkbox-group">
+                <label>Type of Training (select all that apply)</label>
+                <label><input type="checkbox" name="trainingType" value="private"> Private sessions (at home or trainer's facility)</label>
+                <label><input type="checkbox" name="trainingType" value="group"> Group classes</label>
+                <label><input type="checkbox" name="trainingType" value="virtual"> Virtual/online training</label>
+                <label><input type="checkbox" name="trainingType" value="boardAndTrain"> Board and train (intensive training while pet stays with trainer)</label>
+            </div>
+            <div class="form-group">
+                <label for="tr-preferredTimes">Preferred Training Days and Times</label>
+                <textarea id="tr-preferredTimes" name="preferredTimes"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="tr-duration">Duration of Training Program</label>
+                <select id="tr-duration" name="duration" required>
+                    <option value="" disabled selected>Select Duration</option>
+                    <option value="single">Single session</option>
+                    <option value="4weeks">4-week program</option>
+                    <option value="8weeks">8-week program</option>
+                    <option value="custom">Custom</option>
+                </select>
+                <input type="text" id="tr-customDuration" name="customDuration" placeholder="Please specify" style="display: none;">
+            </div>
+
+            <h3>Pet's Routine and Environment</h3>
+            <div class="form-group">
+                <label for="tr-dailySchedule">Daily Schedule</label>
+                <textarea id="tr-dailySchedule" name="dailySchedule" placeholder="Feeding times, walks, playtime, etc."></textarea>
+            </div>
+            <div class="form-group">
+                <label for="tr-livingEnvironment">Living Environment</label>
+                <select id="tr-livingEnvironment" name="livingEnvironment" required>
+                    <option value="" disabled selected>Select Living Environment</option>
+                    <option value="apartment">Apartment</option>
+                    <option value="house">House with Yard</option>
+                    <option value="other">Other (please describe)</option>
+                </select>
+                <input type="text" id="tr-customLivingEnvironment" name="customLivingEnvironment" placeholder="Please describe" style="display: none;">
+            </div>
+            <div class="checkbox-group">
+                <label>Social Interactions (select all that apply)</label>
+                <label><input type="checkbox" name="socialInteractions" value="otherPets"> Interacts with other pets regularly</label>
+                <label><input type="checkbox" name="socialInteractions" value="alone"> Prefers to be alone</label>
+                <label><input type="checkbox" name="socialInteractions" value="publicSpaces"> Visits dog parks or public spaces</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit Booking</button>
+        </form>
+    </div>
+</div>
+
+<script src="script.js"></script>
+
+<footer id="main-footer" class="main-footer">
+    <div class="footer-content">
+        <p>&copy; 2024 Pawsome Pet Care. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="social-links">
+            <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+            <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+            <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+        </div>
+    </div>
+</footer>
+
 </body>
 </html>
-
