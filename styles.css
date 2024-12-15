@@ -105,11 +105,11 @@ body {
 }
 
 .main-content {
-    padding-top: 70px; /* Adjusted to match header height */
+    padding-top: 70px;
 }
 
 .full-screen {
-    min-height: calc(100vh - 70px); /* Adjusted to account for header height */
+    min-height: calc(100vh - 70px);
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
